@@ -9,4 +9,12 @@ class InvalidBody extends receptError{
     }
 }
 
-module.exports={ receptError,InvalidBody }
+class InvalidCredentials extends receptError{
+    constructor(){
+        super()
+        this.message=`Invalid credentials`
+        this.errorCode=403
+    }
+}
+
+module.exports={ receptError,InvalidBody,InvalidCredentials }

@@ -10,8 +10,13 @@ module.exports={
             }
             const user  = await User.create({email,name,password})
             res.json({message:'You have registered!'})            
+        }catch(error){next(error)}    
+    },
+    async login(req,res,next){
+        try{
+            const {email,password}=req.body
+            const token=await User.authenticate(email,password)
+            res.json({token,email})
         }catch(error){next(error)}
-
-        
     }
 }
