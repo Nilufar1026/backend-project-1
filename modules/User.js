@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize')
 const db=require('../database/connection')
+const bcrypt=require('bcryptjs')
 
 const User=db.define('User',{
     email:{
@@ -7,7 +8,7 @@ const User=db.define('User',{
         allowNull:false,
         unique:{
             args:true,
-            mes:'Email already exists!'
+            msg:'Email already exists!'
         }
     },
     name:{
@@ -18,6 +19,10 @@ const User=db.define('User',{
         type:DataTypes.STRING,
         allowNull:false
     }
+})
+
+User.beforeCreate((user,options)=>{
+    user.password=bcrypt.hashSync(user.password,10)
 })
 
 module.exports=User

@@ -9,4 +9,4 @@ class InvalidBody extends receptError{
     }
 }
 
-module.exports={ InvalidBody }
+module.exports={ receptError,InvalidBody }
