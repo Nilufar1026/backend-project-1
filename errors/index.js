@@ -14,7 +14,23 @@ class InvalidCredentials extends receptError{
         super()
         this.message=`Invalid credentials`
         this.errorCode=403
+    } 
+}
+class unauthorized extends receptError{
+    constructor(){
+        super()
+        this.message=`Unauthorized`
+        this.errorCode=401
+    }
+}
+class tokenExpired extends receptError{
+    constructor(){
+        super()
+        this.message=`Token expired,please login again`
+        this.errorCode=401
     }
 }
 
-module.exports={ receptError,InvalidBody,InvalidCredentials }
+
+
+module.exports={ receptError,InvalidBody,InvalidCredentials,unauthorized,tokenExpired }
