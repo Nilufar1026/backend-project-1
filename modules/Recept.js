@@ -20,4 +20,4 @@ const Recept=db.define('Recept',{
 User.hasMany(Recept)
 Recept.belongsTo(User)
 
-module.exports=User
+module.exports=Recept
