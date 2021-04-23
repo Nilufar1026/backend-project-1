@@ -9,7 +9,7 @@ router.post('/',Auth.user,receptController.create)
 router.get('/ingredients',Auth.user,receptController.getAllIngredients)  //need check ,after patch
 router.get('/:id',Auth.user,receptController.getReceptById)
 router.patch('/:id',Auth.user,receptController.update)
-// router.delete('/:id',Auth.user,receptController.delete)
+router.delete('/:id',Auth.user,receptController.delete)
 
 module.exports=router
 

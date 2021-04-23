@@ -65,5 +65,15 @@ module.exports={
             res.json({message:'Updated'})
         }catch(error){next(error)}
     },
-
+    async delete(req,res,next){
+        try{
+            const {id}=req.params
+            const recepts = await Recept.findOne({where:{id}})
+            if(recepts.UserId != req.user.id){ 
+                throw new unauthorized()
+            }
+            await recepts.destroy()
+            res.json({message:'recept has deleted'})
+        }catch(error){next(error)}
+    },
 }
