@@ -13,6 +13,20 @@ module.exports={
             res.json({recept})
         }catch(error){next(error)}
     },
-
+    
+    async getAllIngredients(req,res,next){
+        const page= +req.query.page || 0
+        let pageSize= +req.query.pageSize || 10
+        pageSize = pageSize < 1 ? 1 : pageSize
+        pageSize = pageSize >10 ? 10 : pageSize
+        const UserId=req.user.id
+        const allIngredients=await Recept.findAll({
+            limit:pageSize,
+            offset:page*pageSize,
+            attributes: ['name','ingredients'],
+            where:{ UserId }
+        })
+        res.json({allIngredients})
+    }
 
 }
