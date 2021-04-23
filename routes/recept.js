@@ -5,18 +5,15 @@ const receptController=require('../controller/receptController')
 const Auth=require('../middleware/auth')
 
 router.post('/',Auth.user,receptController.create)
-router.get('/ingredients',Auth.user,receptController.getAllIngredients)
+// router.get('/',Auth.user,receptController.recept)
+router.get('/ingredients',Auth.user,receptController.getAllIngredients)  //need check ,after patch
 router.get('/:id',Auth.user,receptController.getReceptById)
-// router.patch('/:id',Auth.user,receptController.update)
+router.patch('/:id',Auth.user,receptController.update)
 // router.delete('/:id',Auth.user,receptController.delete)
 
 module.exports=router
-// GET
-// /ingredients
-// Listar ingredienser paginerat. Denna endpoint ska även ha en sökfunktion med hjälp av en query-param “filter”.
-// POST
-// /recipes
-// Skapar ett nytt recept. Endast tillgänglig för ägaren.
+
+
 // PATCH
 // /recipes/:id
 // Uppdaterar ett recept Endast tillgänglig för ägaren.
@@ -26,7 +23,5 @@ module.exports=router
 // GET
 // /recipes
 // Hämtar recept paginerat. Denna endpoint ska även ha en sökfunktion med hjälp av en query-param “filter”
-// GET
-// /recipes/:id
-// Hämtar ett specifikt recept
+
 

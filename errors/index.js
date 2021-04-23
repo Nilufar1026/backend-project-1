@@ -30,7 +30,13 @@ class tokenExpired extends receptError{
         this.errorCode=401
     }
 }
+class receptNotFound extends receptError{
+    constructor(id){
+        super()
+        this.message=`recept with id ${id} not found`
+        this.errorCode=404
+    }
+}
 
 
-
-module.exports={ receptError,InvalidBody,InvalidCredentials,unauthorized,tokenExpired }
+module.exports={ receptError,InvalidBody,InvalidCredentials,unauthorized,tokenExpired,receptNotFound }
