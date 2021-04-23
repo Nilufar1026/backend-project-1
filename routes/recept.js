@@ -5,7 +5,7 @@ const receptController=require('../controller/receptController')
 const Auth=require('../middleware/auth')
 
 router.post('/',Auth.user,receptController.create)
-// router.get('/',Auth.user,receptController.recept)
+router.get('/',Auth.user,receptController.getAllRecept)
 router.get('/ingredients',Auth.user,receptController.getAllIngredients)  //need check ,after patch
 router.get('/:id',Auth.user,receptController.getReceptById)
 router.patch('/:id',Auth.user,receptController.update)

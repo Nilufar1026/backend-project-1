@@ -28,7 +28,7 @@ module.exports={
         const UserId=req.user.id
         const allIngredients=await Recept.findAll({
             limit:pageSize,
-            offset:page*pageSize,
+            offset:(page-1)*pageSize,
             attributes: ['name','ingredients'],
             where:{ UserId }
         })
@@ -76,4 +76,16 @@ module.exports={
             res.json({message:'recept has deleted'})
         }catch(error){next(error)}
     },
+
+    async getAllRecept(req,res,next){
+        const {page,pageSize}=parseQuery(req.query)
+        const UserId=req.user.id
+        const recepts=await Recept.findAll({
+            limit:pageSize,
+            offset:(page-1)*pageSize,
+            where:{ UserId }
+        })
+        res.json({recepts})
+    },
+    
 }
