@@ -1,4 +1,5 @@
 const db=require('./connection')
-const User=require('../modules/User')
+require('../modules/User')
+require('../modules/Recept')
 
 db.sync()

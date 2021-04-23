@@ -3,12 +3,14 @@ require('dotenv').config()
 
 const app=express()
 const userRoutes=require('./routes/users')
+const receptRoutes=require('./routes/recept')
 const {errorHandler}=require('./middleware/errorHandler')
 
 
 app.use( express.json() )
 
 app.use(userRoutes)
+app.use('/recipes',receptRoutes)
 
 app.use(errorHandler)
 
