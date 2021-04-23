@@ -13,7 +13,7 @@ module.exports={
             res.json({recept})
         }catch(error){next(error)}
     },
-    
+
     async getAllIngredients(req,res,next){
         const page= +req.query.page || 0
         let pageSize= +req.query.pageSize || 10
@@ -27,6 +27,13 @@ module.exports={
             where:{ UserId }
         })
         res.json({allIngredients})
-    }
+    },
+    async getReceptById(req,res,next){
+        const id=req.params.id
+        const recept=await Recept.findOne({
+            where:{ id }
+        })
+        res.json({recept})
+    },
 
 }
