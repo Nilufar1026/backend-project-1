@@ -26,10 +26,10 @@ module.exports={
 
     async getAllIngredients(req,res,next){
         try {
-            const {page,pageSize}=parseQuery(req.query)
+            const page=+req.params.page || 0
             const allIngredients=await Ingredients.findAll({
-                limit:pageSize,
-                offset:(page-1)*pageSize,
+                limit:page,
+                offset:5*page,
                 attributes: ['item'],
             })
             res.json({allIngredients})
