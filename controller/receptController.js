@@ -1,6 +1,7 @@
 const { InvalidBody,receptNotFound, unauthorized } = require("../errors/index");
-const { update } = require("../models/Recept");
+
 const Recept = require("../models/Recept");
+const Ingredients = require("../models/Ingredients");
 
 function parseQuery(query){
     const page= +query.page || 0
@@ -13,26 +14,28 @@ function parseQuery(query){
 module.exports={
     async create(req,res,next){
         try{
-            const {name,ingredients,instruction} = req.body
-            if( !name || !ingredients || !instruction ){
-                throw new InvalidBody(['name','ingredients','instruction'])
+            const {title,instruction} = req.body
+            if( !title || !instruction ){
+                throw new InvalidBody(['title','instruction'])
             }
             const UserId=req.user.id
-            const recept= await Recept.create({name,ingredients,instruction,UserId})
+            const recept= await Recept.create({title,instruction,UserId})
             res.json({recept})
         }catch(error){next(error)}
     },
 
     async getAllIngredients(req,res,next){
-        const {page,pageSize}=parseQuery(req.query)
-        const UserId=req.user.id
-        const allIngredients=await Recept.findAll({
-            limit:pageSize,
-            offset:(page-1)*pageSize,
-            attributes: ['name','ingredients'],
-            where:{ UserId }
-        })
-        res.json({allIngredients})
+        try {
+            const {page,pageSize}=parseQuery(req.query)
+            const allIngredients=await Ingredients.findAll({
+                limit:pageSize,
+                offset:(page-1)*pageSize,
+                attributes: ['item'],
+            })
+            res.json({allIngredients})
+          } catch (error) {
+            next(error);
+        }
     },
 
     async getReceptById(req,res,next){
@@ -51,10 +54,9 @@ module.exports={
     async update(req,res,next){
         try{
             const {id}=req.params
-            const {name,ingredients,instruction} = req.body
+            const {title,instruction} = req.body
             const field={}
-            if(name) field.name=name
-            if(ingredients) field.ingredients=ingredients
+            if(title) field.title=title
             if(instruction) field.instruction=instruction
             
             const recepts = await Recept.findOne({where:{id}})
@@ -65,6 +67,7 @@ module.exports={
             res.json({message:'Updated'})
         }catch(error){next(error)}
     },
+
     async delete(req,res,next){
         try{
             const {id}=req.params
