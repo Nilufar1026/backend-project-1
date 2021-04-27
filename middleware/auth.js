@@ -1,5 +1,5 @@
 const {unauthorized}=require('../errors/index')
-const User=require('../modules/User')
+const User=require('../models/User')
 
 
 module.exports={

@@ -1,6 +1,6 @@
 const { InvalidBody,receptNotFound, unauthorized } = require("../errors/index");
-const { update } = require("../modules/Recept");
-const Recept = require("../modules/Recept");
+const { update } = require("../models/Recept");
+const Recept = require("../models/Recept");
 
 function parseQuery(query){
     const page= +query.page || 0

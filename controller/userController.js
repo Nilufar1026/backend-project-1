@@ -1,5 +1,5 @@
 const {InvalidBody}=require('../errors/index')
-const User=require('../modules/User')
+const User=require('../models/User')
 
 module.exports={
     async register(req,res,next){

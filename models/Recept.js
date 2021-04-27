@@ -3,13 +3,9 @@ const db=require('../database/connection')
 const User=require('./User')
 
 const Recept=db.define('Recept',{
-    name:{
+    title:{
         type:DataTypes.STRING,
         allowNull:false,
-    },
-    ingredients:{
-        type:DataTypes.STRING,
-        allowNull:false
     },
     instruction:{
         type:DataTypes.STRING,

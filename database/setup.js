@@ -1,5 +1,9 @@
 const db=require('./connection')
-require('../modules/User')
-require('../modules/Recept')
+require('../models/User')
+require('../models/Recept')
+require('../models/Ingredients')
+require('../models/receptIngredients')
+
+
 
 db.sync()
