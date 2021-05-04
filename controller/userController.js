@@ -2,6 +2,13 @@ const {InvalidBody}=require('../errors/index')
 const User=require('../models/User')
 
 module.exports={
+    async all(req,res,next){
+        try{
+            const users=await User.findAll({attributes:{exclude:['password']}})
+            res.json({users})
+        }catch(error){next(error)}    
+    },    
+
     async register(req,res,next){
         try{
             const {email,name,password}=req.body

@@ -23,6 +23,13 @@ class unauthorized extends receptError{
         this.errorCode=401
     }
 }
+class Forbidden extends receptError{
+    constructor(){
+        super()
+        this.message=`Forbidden`
+        this.errorCode=403
+    }
+}
 class tokenExpired extends receptError{
     constructor(){
         super()
@@ -39,4 +46,4 @@ class receptNotFound extends receptError{
 }
 
 
-module.exports={ receptError,InvalidBody,InvalidCredentials,unauthorized,tokenExpired,receptNotFound }
+module.exports={ receptError,InvalidBody,InvalidCredentials,unauthorized,tokenExpired,receptNotFound,Forbidden }
